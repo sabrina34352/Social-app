@@ -4,11 +4,11 @@ import { Flex, VStack, Text, Box, Heading, Divider } from '@chakra-ui/react';
 function Mainpage() {
   return (
     <>
-      <Flex gap={5}>
-        <VStack w="300px">
+      <Flex gap={5} m={1}>
+        <VStack w="300px" display={['none', 'none', 'none', 'block']}>
           <Box border="2px" borderColor="black.400" borderRadius="lg">
-            <Box pt="60px" textAlign="center" w="300px" h="150px" bg="gray.200">
-              <Text>There will be someones photo</Text>
+            <Box pt="60px" textAlign="center" w="full" h="150px" bg="gray.200">
+              <Text color="black">There will be someones photo</Text>
             </Box>
             <Flex justify="space-around" pt={2} pb={7}>
               <Text>Posts</Text>
@@ -18,29 +18,24 @@ function Mainpage() {
               <Text>Followers</Text>
             </Flex>
           </Box>
-          <Box
-            textAlign="left"
-            border="2px"
-            borderColor="gray"
-            w="300px"
-          >
+          <Box textAlign="left" border="2px" borderColor="gray" w="300px">
             <Text m={1} fontWeight="semibold" fontSize="xl" lineHeight="tight">
               Who to follow:
             </Text>
             {/* Один юзер */}
-            <Flex m={2} bg="gray.50">
+            <Flex m={2} bg="gray.50" >
               <Box w="50px" h="50px" bg="gray.100">
                 photo
               </Box>
-              <Text>Sabrina Babakulova</Text>
+              <Text color="black">Sabrina Babakulova</Text>
             </Flex>
           </Box>
           <Box></Box>
         </VStack>
         {/* MAIN PAGE THINGY */}
-        <VStack>
+        <VStack w="full">
           <Box
-            w="780px"
+          w="full"
             border="2px"
             borderColor="black.100"
             borderRadius={10}
@@ -55,7 +50,7 @@ function Mainpage() {
                 <Text>@somebody</Text>
                 <Text>Time posted</Text>
               </Flex>
-              <Text isTruncated>Big place for someones text</Text>
+              <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
             </Box>
             <Box border="2px" borderColor="gray" p={3}>
               <Flex gap={4} pb={2}>
@@ -63,7 +58,7 @@ function Mainpage() {
                 <Text>@somebody</Text>
                 <Text>Time posted</Text>
               </Flex>
-              <Text isTruncated>Big place for someones text</Text>
+              <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
             </Box>
             <Box border="2px" borderColor="gray" p={3}>
               <Flex gap={4} pb={2}>
@@ -71,7 +66,7 @@ function Mainpage() {
                 <Text>@somebody</Text>
                 <Text>Time posted</Text>
               </Flex>
-              <Text isTruncated>Big place for someones text</Text>
+              <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
             </Box>
             <Box border="2px" borderColor="gray" p={3}>
               <Flex gap={4} pb={2}>
@@ -79,7 +74,7 @@ function Mainpage() {
                 <Text>@somebody</Text>
                 <Text>Time posted</Text>
               </Flex>
-              <Text isTruncated>Big place for someones text</Text>
+              <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
             </Box>
             <Box border="2px" borderColor="gray" p={3}>
               <Flex gap={4} pb={2}>
@@ -87,7 +82,7 @@ function Mainpage() {
                 <Text>@somebody</Text>
                 <Text>Time posted</Text>
               </Flex>
-              <Text isTruncated>Big place for someones text</Text>
+              <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
             </Box>
             <Box border="2px" borderColor="gray" p={3}>
               <Flex gap={4} pb={2}>
@@ -95,8 +90,8 @@ function Mainpage() {
                 <Text>@somebody</Text>
                 <Text>Time posted</Text>
               </Flex>
-              <Text isTruncated>
-                Big place for someones text and i mean any text bruhhh
+              <Text noOfLines={[1, 2, 3]}>
+                Big place for someones text and im typing and typing and typing and typing and keep on typing what will you do 
               </Text>
             </Box>
           </Box>
