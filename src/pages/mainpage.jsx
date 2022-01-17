@@ -23,7 +23,7 @@ function Mainpage() {
               Who to follow:
             </Text>
             {/* Один юзер */}
-            <Flex m={2} bg="gray.50" >
+            <Flex m={2} bg="gray.50">
               <Box w="50px" h="50px" bg="gray.100">
                 photo
               </Box>
@@ -35,7 +35,7 @@ function Mainpage() {
         {/* MAIN PAGE THINGY */}
         <VStack w="full">
           <Box
-          w="full"
+            w="full"
             border="2px"
             borderColor="black.100"
             borderRadius={10}
@@ -45,54 +45,80 @@ function Mainpage() {
             <Divider mt={5} mb={5} />
             {/* Один юзер */}
             <Box border="2px" borderColor="gray" p={3}>
-              <Flex gap={4} pb={2}>
+              <Flex gap={4} pb={2} justify="flex-end">
                 <Text>UserName</Text>
                 <Text>@somebody</Text>
                 <Text>Time posted</Text>
               </Flex>
+              <Box p={5}>
+              <Text fontSize={[22, 25]}>a fucking heading</Text>
+              <Divider />
               <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
+              </Box>
             </Box>
             <Box border="2px" borderColor="gray" p={3}>
-              <Flex gap={4} pb={2}>
+              <Flex gap={4} pb={2} justify="flex-end">
                 <Text>UserName</Text>
                 <Text>@somebody</Text>
                 <Text>Time posted</Text>
               </Flex>
+              <Box p={5}>
+              <Text fontSize={[22, 25]}>a fucking heading</Text>
+              <Divider />
               <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
+              </Box>
             </Box>
             <Box border="2px" borderColor="gray" p={3}>
-              <Flex gap={4} pb={2}>
+              <Flex gap={4} pb={2} justify="flex-end">
                 <Text>UserName</Text>
                 <Text>@somebody</Text>
                 <Text>Time posted</Text>
               </Flex>
+              <Box p={5}>
+              <Text fontSize={[22, 25]}>a fucking heading</Text>
+              <Divider />
               <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
+              </Box>
             </Box>
             <Box border="2px" borderColor="gray" p={3}>
-              <Flex gap={4} pb={2}>
+              <Flex gap={4} pb={2} justify="flex-end">
                 <Text>UserName</Text>
                 <Text>@somebody</Text>
                 <Text>Time posted</Text>
               </Flex>
+              <Box p={5}>
+              <Text fontSize={[22, 25]}>a fucking heading</Text>
+              <Divider />
               <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
+              </Box>
             </Box>
             <Box border="2px" borderColor="gray" p={3}>
-              <Flex gap={4} pb={2}>
+              <Flex gap={4} pb={2} justify="flex-end">
                 <Text>UserName</Text>
                 <Text>@somebody</Text>
                 <Text>Time posted</Text>
               </Flex>
+              <Box p={5}>
+              <Text fontSize={[22, 25]}>a fucking heading</Text>
+              <Divider />
               <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
+              </Box>
             </Box>
             <Box border="2px" borderColor="gray" p={3}>
-              <Flex gap={4} pb={2}>
+              <Flex gap={4} pb={2} justify="flex-end">
                 <Text>UserName</Text>
                 <Text>@somebody</Text>
                 <Text>Time posted</Text>
               </Flex>
+              <Box p={5}>
+
+              <Text fontSize={[22, 25]}>a fucking heading</Text>
+              <Divider />
               <Text noOfLines={[1, 2, 3]}>
-                Big place for someones text and im typing and typing and typing and typing and keep on typing what will you do 
+                Big place for someones text and im typing and typing and typing
+                and typing and keep on typing what will you do
               </Text>
+              </Box>
             </Box>
           </Box>
         </VStack>
