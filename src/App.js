@@ -6,6 +6,7 @@ import theme from './components/theme';
 import Settings from './pages/settings';
 import NotFound from './pages/notfound';
 import Chat from './pages/Chat';
+import Posting from './pages/Posting';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
               <Route index element={<Mainpage />} />
               <Route path= "settings" element={<Settings />} />
               <Route path= "chat" element={<Chat />} />
+              <Route path= "posting" element={<Posting/>} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

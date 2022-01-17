@@ -70,7 +70,9 @@ function Navbar() {
             </Button>
           </Link>
           <Spacer />
+          <Link to="posting">
           <Button>Text</Button>
+          </Link>
         </Flex>
       </Box>
     </>
