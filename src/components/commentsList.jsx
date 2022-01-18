@@ -10,7 +10,7 @@ const CommentsList = ({ comments }) => (
           <Text>{comment.tagname}</Text>
         </Flex>
         <Box p={5}>
-          <Text fontSize={[22, 25]}>a fucking heading</Text>
+          <Text fontSize={[22, 25]}>{comment.heading}</Text>
           <Divider />
           <Text noOfLines={[1, 2, 3]}>{comment.text}</Text>
         </Box>

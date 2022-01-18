@@ -1,20 +1,21 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Flex, VStack, Text, Box, Heading, Divider } from '@chakra-ui/react';
 import CommentsList from '../components/commentsList';
-
+import { newComments } from './Posting';
 
 function Mainpage() {
+  const [clicked, setClicked] = useState(false);
   const [comments, setComments] = useState({ comments: [] });
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch(
         'http://localhost:8000/api/postingposts/add-comment'
-      );
-      const body = await result.json();
-      setComments(body);
-      console.log(body);
+      ).then(result => result.json());
+      setComments(result);
+      console.log(result);
     };
-    fetchData();
+    let data = fetchData();
+    data.then(() => setClicked(true));
   }, []);
   return (
     <>
@@ -58,7 +59,7 @@ function Mainpage() {
             <Heading>Other Posts</Heading>
             <Divider mt={5} mb={5} />
             {/* Один юзер */}
-          <CommentsList comments={comments}/>
+            {clicked && <CommentsList comments={comments} />}
             {/* <Box border="2px" borderColor="gray" p={3}>
               <Flex gap={4} pb={2} justify="flex-end">
                 <Text>UserName</Text>

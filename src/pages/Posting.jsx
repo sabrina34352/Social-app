@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   VStack,
@@ -8,7 +8,29 @@ import {
   Input,
 } from '@chakra-ui/react';
 
+export const newComments = [];
+
 function Posting() {
+  const [username, setUsername] = useState('');
+  const [tagname, setTagname] = useState('@undefined');
+  const [heading, setHeading] = useState('');
+  const [text, setText] = useState('');
+
+  const addComment = async () => {
+    const result = await fetch(
+      'http://localhost:8000/api/postingposts/add-comment',
+      {
+        method: 'post',
+        body: JSON.stringify({ username, tagname, heading, text }),
+        headers: { 'Content-Type': 'application/json' },
+      }
+    ).then(result =>result.json());
+    newComments.push(result);
+    console.log(result);
+
+  };
+
+
   return (
     <Box pos="relative">
       <VStack m={1}>
@@ -20,12 +42,18 @@ function Posting() {
           borderRadius="lg"
           gap={10}
         >
-          <Input placeholder="your name" />
-          <Input placeholder="Big Place for Main Text Of the post" />
+          <Input
+            placeholder="your name"
+            value={username}
+            onChange={event => setUsername(event.target.value)}
+          />
+          <Input placeholder="Big Place for Main Text Of the post" value={heading} onChange={event =>setHeading(event.target.value)} />
           <Textarea
             placeholder="Space for additional explanation"
             size="lg"
             resize="none"
+            value={text}
+            onChange={event => setText(event.target.value)}
           />
         </SimpleGrid>
       </VStack>
@@ -36,6 +64,7 @@ function Posting() {
         borderRadius="lg"
         pos="fixed"
         right={20}
+        onClick={() => addComment()}
       >
         Post
       </Button>
