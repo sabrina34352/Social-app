@@ -3,12 +3,11 @@ import {
   Box,
   VStack,
   SimpleGrid,
-  Text,
-  Image,
-  Center,
+  Textarea,
   Button,
+  Input,
 } from '@chakra-ui/react';
-import photochka from '../NotFoundPhoto.png';
+
 function Posting() {
   return (
     <Box pos="relative">
@@ -19,22 +18,15 @@ function Posting() {
           w="full"
           p={5}
           borderRadius="lg"
+          gap={10}
         >
-          <Text
-            fontSize={[20, 25]}
-            border="2px"
-            borderColor="gray"
-            p={1}
-            m="0 5px 15px"
-          >
-            Big Place for Main Text Of the post
-          </Text>
-          <Text p="5px 20px" border="2px" borderColor="gray">
-            There is small description of the thing that person posted
-          </Text>
-          <Center>
-            <Image src={photochka} alt="somePhotoAlongWithText" m={5} />
-          </Center>
+          <Input placeholder="your name" />
+          <Input placeholder="Big Place for Main Text Of the post" />
+          <Textarea
+            placeholder="Space for additional explanation"
+            size="lg"
+            resize="none"
+          />
         </SimpleGrid>
       </VStack>
       <Button

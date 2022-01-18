@@ -1,7 +1,21 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Flex, VStack, Text, Box, Heading, Divider } from '@chakra-ui/react';
+import CommentsList from '../components/commentsList';
+
 
 function Mainpage() {
+  const [comments, setComments] = useState({ comments: [] });
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await fetch(
+        'http://localhost:8000/api/postingposts/add-comment'
+      );
+      const body = await result.json();
+      setComments(body);
+      console.log(body);
+    };
+    fetchData();
+  }, []);
   return (
     <>
       <Flex gap={5} m={1}>
@@ -44,82 +58,20 @@ function Mainpage() {
             <Heading>Other Posts</Heading>
             <Divider mt={5} mb={5} />
             {/* Один юзер */}
-            <Box border="2px" borderColor="gray" p={3}>
+          <CommentsList comments={comments}/>
+            {/* <Box border="2px" borderColor="gray" p={3}>
               <Flex gap={4} pb={2} justify="flex-end">
                 <Text>UserName</Text>
                 <Text>@somebody</Text>
                 <Text>Time posted</Text>
               </Flex>
               <Box p={5}>
-              <Text fontSize={[22, 25]}>a fucking heading</Text>
-              <Divider />
-              <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
+                <Text fontSize={[22, 25]}>a fucking heading</Text>
+                <Divider />
+                <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
               </Box>
             </Box>
-            <Box border="2px" borderColor="gray" p={3}>
-              <Flex gap={4} pb={2} justify="flex-end">
-                <Text>UserName</Text>
-                <Text>@somebody</Text>
-                <Text>Time posted</Text>
-              </Flex>
-              <Box p={5}>
-              <Text fontSize={[22, 25]}>a fucking heading</Text>
-              <Divider />
-              <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
-              </Box>
-            </Box>
-            <Box border="2px" borderColor="gray" p={3}>
-              <Flex gap={4} pb={2} justify="flex-end">
-                <Text>UserName</Text>
-                <Text>@somebody</Text>
-                <Text>Time posted</Text>
-              </Flex>
-              <Box p={5}>
-              <Text fontSize={[22, 25]}>a fucking heading</Text>
-              <Divider />
-              <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
-              </Box>
-            </Box>
-            <Box border="2px" borderColor="gray" p={3}>
-              <Flex gap={4} pb={2} justify="flex-end">
-                <Text>UserName</Text>
-                <Text>@somebody</Text>
-                <Text>Time posted</Text>
-              </Flex>
-              <Box p={5}>
-              <Text fontSize={[22, 25]}>a fucking heading</Text>
-              <Divider />
-              <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
-              </Box>
-            </Box>
-            <Box border="2px" borderColor="gray" p={3}>
-              <Flex gap={4} pb={2} justify="flex-end">
-                <Text>UserName</Text>
-                <Text>@somebody</Text>
-                <Text>Time posted</Text>
-              </Flex>
-              <Box p={5}>
-              <Text fontSize={[22, 25]}>a fucking heading</Text>
-              <Divider />
-              <Text noOfLines={[1, 2, 3]}>Big place for someones text</Text>
-              </Box>
-            </Box>
-            <Box border="2px" borderColor="gray" p={3}>
-              <Flex gap={4} pb={2} justify="flex-end">
-                <Text>UserName</Text>
-                <Text>@somebody</Text>
-                <Text>Time posted</Text>
-              </Flex>
-              <Box p={5}>
-
-              <Text fontSize={[22, 25]}>a fucking heading</Text>
-              <Divider />
-              <Text noOfLines={[1, 2, 3]}>
-                Big place for someones text and im typing and typing and typing
-                and typing and keep on typing what will you do
-              </Text>
-              </Box>
-            </Box>
+            */}
           </Box>
         </VStack>
       </Flex>
