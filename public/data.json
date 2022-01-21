@@ -4,13 +4,30 @@
       "username": "sabrina",
       "tagname": "@getrektttt",
       "heading": "wow new post",
-      "text": "my first ever post"
+      "text": "my first ever post",
+      "likes": 0,
+      "followers": 0
     },
     {
       "username": "laylo",
       "tagname": "@layloazamova",
       "heading": "wow new second post",
-      "text": "my second post"
+      "text": "my second post",
+      "likes": 0,
+      "followers": 0
+    }
+  ],
+
+  "users": [
+    {
+      "tagname": "@getrektttt",
+      "username": "sabrina",
+      "email": "sabrina.babakulova@gmail.com"
+    },
+    {
+      "tagname": "@getrektttt",
+      "username": "sabrina",
+      "email": "sabrina.babakulova@gmail.com"
     }
   ]
 }

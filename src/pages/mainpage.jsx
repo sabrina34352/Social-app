@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Flex, VStack, Text, Box, Heading, Divider } from '@chakra-ui/react';
 import CommentsList from '../components/commentsList';
-import { newComments } from './Posting';
 
 function Mainpage() {
   const [clicked, setClicked] = useState(false);
@@ -9,7 +8,7 @@ function Mainpage() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch(
-        'http://localhost:8000/api/postingposts/add-comment'
+        'http://localhost:8000/api/posting/add-comment'
       ).then(result => result.json());
       setComments(result);
       console.log(result);
