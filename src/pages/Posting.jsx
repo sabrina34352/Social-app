@@ -8,21 +8,24 @@ import {
   Input,
 } from '@chakra-ui/react';
 
+export const newComments = [];
+
 function Posting() {
   const [username, setUsername] = useState('');
-  const [tagname, setTagname] = useState('');
+  const [tagname, setTagname] = useState('@undefined');
   const [heading, setHeading] = useState('');
   const [text, setText] = useState('');
 
   const addComment = async () => {
     const result = await fetch(
-      'http://localhost:8000/api/posting/add-comment',
+      'http://localhost:8000/api/postingposts/add-comment',
       {
         method: 'post',
         body: JSON.stringify({ username, tagname, heading, text }),
         headers: { 'Content-Type': 'application/json' },
       }
     ).then(result =>result.json());
+    newComments.push(result);
     console.log(result);
 
   };
