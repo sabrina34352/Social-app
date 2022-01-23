@@ -2,7 +2,7 @@ import express from 'express';
 // import session from 'express-session';
 import bodyParser from 'body-parser';
 import { comments } from '../../public/data.json';
-import {authRoute} from './authRoute';
+import authRoute from './authRoute';
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 //   })
 //   );
   
-app.use("/auth", authRoute);
+app.use("/auth/", authRoute);
 
 app.post('/api/posting/add-comment', (req, res) => {
   const { username, tagname, heading, text } = req.body;

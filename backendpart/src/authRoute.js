@@ -1,6 +1,6 @@
 import {users} from '../../public/data.json';
-import express from 'express'
-const router = new express.Router();
+import Router from 'express'
+const router = new Router();
 
 //for users to log in
 router.post('/login', (req, res) => {
@@ -26,7 +26,7 @@ router.post('/login', (req, res) => {
       : newUserAddition();
   } catch (error) {
     res.send(error);
-  }
+  } 
 });
 
 router.get('/login', (req, res) => {
@@ -41,4 +41,4 @@ router.get('/login', (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
