@@ -9,24 +9,31 @@ import {
 } from '@chakra-ui/react';
 
 function Posting() {
+  const [error, setError] = useState(false);
   const [username, setUsername] = useState('');
   const [tagname, setTagname] = useState('');
   const [heading, setHeading] = useState('');
   const [text, setText] = useState('');
 
   const addComment = async () => {
-    const result = await fetch(
-      'http://localhost:8000/api/posting/add-comment',
-      {
-        method: 'post',
-        body: JSON.stringify({ username, tagname, heading, text }),
-        headers: { 'Content-Type': 'application/json' },
-      }
-    ).then(result =>result.json());
-    console.log(result);
-
+    await fetch('http://localhost:8000/api/posting/add-comment', {
+      method: 'post',
+      body: JSON.stringify({ username, tagname, heading, text }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(res => res.json())
+      // .then(data => console.log(data))
+      .catch(err => {
+        setError(true);
+        console.error('fuck you ', err);
+        // if (err.response) {
+        //   console.log(err.response.data);
+        //   // console.log(err.response.status);
+        //   // console.log(err.response.headers);
+        //   console.log('fuck you');
+        // }
+      });
   };
-
 
   return (
     <Box pos="relative">
@@ -44,7 +51,11 @@ function Posting() {
             value={username}
             onChange={event => setUsername(event.target.value)}
           />
-          <Input placeholder="Big Place for Main Text Of the post" value={heading} onChange={event =>setHeading(event.target.value)} />
+          <Input
+            placeholder="Big Place for Main Text Of the post"
+            value={heading}
+            onChange={event => setHeading(event.target.value)}
+          />
           <Textarea
             placeholder="Space for additional explanation"
             size="lg"
@@ -61,7 +72,15 @@ function Posting() {
         borderRadius="lg"
         pos="fixed"
         right={20}
-        onClick={() => addComment()}
+        onClick={() => {
+          if (!error) {
+            addComment();
+          }
+          setUsername('');
+          setTagname('');
+          setHeading('');
+          setText('');
+        }}
       >
         Post
       </Button>

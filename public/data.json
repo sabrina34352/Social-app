@@ -22,12 +22,14 @@
     {
       "tagname": "@getrektttt",
       "username": "sabrina",
-      "email": "sabrina.babakulova@gmail.com"
+      "email": "sabrina.babakulova@gmail.com",
+      "password":"hashh"
     },
     {
       "tagname": "@getrektttt",
       "username": "sabrina",
-      "email": "sabrina.babakulova@gmail.com"
+      "email": "sabrina.babakulova@gmail.com",
+      "password":"hashh"
     }
   ]
 }
