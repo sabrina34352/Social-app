@@ -5,14 +5,14 @@ import cors from 'cors';
 import { ErrorDetected } from './api-errors';
 import { body, validationResult } from 'express-validator';
 import { comments } from '../../public/data.json';
-import authRoute from './authRoute';
+import registration from './registration';
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
 //{not in frontend}
-app.use('/auth/', authRoute);
+app.use('/auth/', registration);
 
 //{not in the frontend}
 app.post(
@@ -22,17 +22,19 @@ app.post(
   (req, res, next) => {
     const err = validationResult(req);
     if (!err.isEmpty()) {
-      res.status(400).send({ error: err.array() });
+      res.status(400).send( err.array() );
+    }
+    else{
+      try {
+        const { heading, text } = req.body;
+  
+        comments.push({ heading, text });
+        res.status(200).send(comments);
+      } catch (e) {
+        next(e);
+      }
     }
 
-    try {
-      const { heading, text } = req.body;
-
-      comments.push({ heading, text });
-      res.status(200).send(comments);
-    } catch (e) {
-      next(e);
-    }
   }
 );
 

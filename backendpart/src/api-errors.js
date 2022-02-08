@@ -11,16 +11,17 @@ export class ApiErrors extends Error {
   }
   static BadRequest(msg, errors = []) {
     return new ApiErrors(400, msg, errors);
+    // return new ApiErrors("bitch")
   }
 }
 
 //middleware
 export function ErrorDetected(err, req, res, next) {
-  console.log(err);
   if (err instanceof ApiErrors) {
     return res
       .status(err.status)
-      .send({ message: err.message, error: err.errors });
+      // .send({ message: err.message, error: err.errors });
+      .sent("bitch")
   }
   return res.status(500).send('Something went wrong!, ');
 }

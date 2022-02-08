@@ -6,7 +6,7 @@ import { check, body, validationResult } from 'express-validator';
 import { v4 as uuidv4 } from 'uuid';
 const router = new Router();
 
-//for users to log in {not in frontend}
+//for users to register {not in frontend}
 router.post(
   '/registration',
   body('tagname')
@@ -77,5 +77,8 @@ router.post(
 //     next(error);
 //   }
 // });
+
+
+
 
 export default router;

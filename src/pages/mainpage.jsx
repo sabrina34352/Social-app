@@ -3,19 +3,28 @@ import { Flex, VStack, Text, Box, Heading, Divider } from '@chakra-ui/react';
 import CommentsList from '../components/commentsList';
 
 function Mainpage() {
-  const [clicked, setClicked] = useState(false);
   const [comments, setComments] = useState({ comments: [] });
+  const [loaded,setLoaded] = useState(false);
+  
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch(
-        'http://localhost:8000/api/posting/add-comment'
-      ).then(result => result.json());
-      setComments(result);
-      console.log(result);
-    };
-    let data = fetchData();
-    data.then(() => setClicked(true));
+    let isMounted = true;
+    fetch('http://localhost:8000/api/posting/add-comment')
+      .then(result => result.json())
+      .then(json => {
+        if(isMounted){
+          setComments(json)
+          setLoaded(true)
+        }
+      })
+      .catch(err => console.log(err));
+      return ()=>{isMounted=false};
   }, []);
+
+  // const { allcomments } = comments;
+  if(!loaded){
+    return<Text textAlign="center" fontSize={25}>Please Wait...</Text>
+  }
+  
   return (
     <>
       <Flex gap={5} m={1}>
@@ -58,8 +67,10 @@ function Mainpage() {
             <Heading>Other Posts</Heading>
             <Divider mt={5} mb={5} />
             {/* Один юзер */}
-            {clicked && <CommentsList comments={comments} />}
-            {/* <Box border="2px" borderColor="gray" p={3}>
+            {loaded && console.log(comments)}
+            {loaded && <CommentsList comments={comments} />}
+            {/* 
+            <Box border="2px" borderColor="gray" p={3}>
               <Flex gap={4} pb={2} justify="flex-end">
                 <Text>UserName</Text>
                 <Text>@somebody</Text>

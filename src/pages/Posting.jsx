@@ -6,34 +6,38 @@ import {
   Textarea,
   Button,
   Input,
+  Text
 } from '@chakra-ui/react';
 
 function Posting() {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({});
   const [username, setUsername] = useState('');
   const [tagname, setTagname] = useState('');
   const [heading, setHeading] = useState('');
   const [text, setText] = useState('');
 
-  const addComment = async () => {
+  async function addComment(){
     await fetch('http://localhost:8000/api/posting/add-comment', {
       method: 'post',
       body: JSON.stringify({ username, tagname, heading, text }),
       headers: { 'Content-Type': 'application/json' },
     })
-      .then(res => res.json())
-      // .then(data => console.log(data))
-      .catch(err => {
-        setError(true);
-        console.error('fuck you ', err);
-        // if (err.response) {
-        //   console.log(err.response.data);
-        //   // console.log(err.response.status);
-        //   // console.log(err.response.headers);
-        //   console.log('fuck you');
-        // }
-      });
+      .then((res) => {
+        if(!res.ok){
+          res.json()
+          // .then(data => console.log(data[0]))
+          .then(data=>{setError(data[0])})
+          .catch(err => {setError(err)})
+        }else{
+          res.json();
+          setError({});
+        }
+      })
+      .catch(err => console.log("Something went wrong!"))
   };
+  
+
+
 
   return (
     <Box pos="relative">
@@ -73,9 +77,7 @@ function Posting() {
         pos="fixed"
         right={20}
         onClick={() => {
-          if (!error) {
-            addComment();
-          }
+          addComment();
           setUsername('');
           setTagname('');
           setHeading('');
@@ -84,6 +86,17 @@ function Posting() {
       >
         Post
       </Button>
+      {/* {Boolean(error) && error.map(eachone, index)=>{
+        return (
+        <Box>
+          <Text>There is an error:  </Text>
+          
+        </Box>
+      )
+      }} */}
+      {Object.keys(error).length !== 0 && (
+        <Text color="red.400" m={3}>  Error: {error.param}<br/> {error.msg}</Text>
+      )}
     </Box>
   );
 }

@@ -1,9 +1,12 @@
 import React from 'react'
+import Signup from '../components/signup'
 
 function Settings() {
     return (
       <div>
-        there will be someones settings
+        
+        <Signup/>
+
         <p>@sabrina babakulova</p>
         
       </div>
