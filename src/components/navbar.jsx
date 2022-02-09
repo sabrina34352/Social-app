@@ -16,7 +16,7 @@ import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
-  const headerBG = useColorModeValue('white', 'black');
+  const headerBG = useColorModeValue('#EFEFEF', '#2C3333');
   return (
     <>
       <Box
