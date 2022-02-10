@@ -16,6 +16,7 @@ app.use('/auth/', registration);
 
 //{not in the frontend}
 app.post(
+
   '/api/posting/add-comment',
   body('heading').notEmpty().withMessage('must not be empty'),
   body('text').not().trim().escape(),

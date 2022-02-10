@@ -30,7 +30,7 @@ router.post(
   (req, res, next) => {
     const err = validationResult(req);
     if (!err.isEmpty()) {
-      return res.status(400).json({ errors: err.array() });
+      return res.status(400).json(err.array());
     }
     try {
       var hasMatchTagName = false;
@@ -77,8 +77,5 @@ router.post(
 //     next(error);
 //   }
 // });
-
-
-
 
 export default router;

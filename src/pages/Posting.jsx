@@ -6,7 +6,8 @@ import {
   Textarea,
   Button,
   Input,
-  Text
+  Text,
+  Center,
 } from '@chakra-ui/react';
 
 function Posting() {
@@ -16,28 +17,29 @@ function Posting() {
   const [heading, setHeading] = useState('');
   const [text, setText] = useState('');
 
-  async function addComment(){
+  async function addComment() {
     await fetch('http://localhost:8000/api/posting/add-comment', {
       method: 'post',
       body: JSON.stringify({ username, tagname, heading, text }),
       headers: { 'Content-Type': 'application/json' },
     })
-      .then((res) => {
-        if(!res.ok){
-          res.json()
-          // .then(data => console.log(data[0]))
-          .then(data=>{setError(data[0])})
-          .catch(err => {setError(err)})
-        }else{
+      .then(res => {
+        if (!res.ok) {
+          res
+            .json()
+            .then(data => {
+              setError(data[0]);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        } else {
           res.json();
           setError({});
         }
       })
-      .catch(err => console.log("Something went wrong!"))
-  };
-  
-
-
+      .catch(err => console.log('Something went wrong!'));
+  }
 
   return (
     <Box pos="relative">
@@ -63,40 +65,34 @@ function Posting() {
           <Textarea
             placeholder="Space for additional explanation"
             size="lg"
-            resize="none"
             value={text}
             onChange={event => setText(event.target.value)}
           />
         </SimpleGrid>
       </VStack>
-      <Button
-        colorScheme="teal"
-        size="lg"
-        variant="outline"
-        borderRadius="lg"
-        pos="fixed"
-        right={20}
-        onClick={() => {
-          addComment();
-          setUsername('');
-          setTagname('');
-          setHeading('');
-          setText('');
-        }}
-      >
-        Post
-      </Button>
-      {/* {Boolean(error) && error.map(eachone, index)=>{
-        return (
-        <Box>
-          <Text>There is an error:  </Text>
-          
-        </Box>
-      )
-      }} */}
       {Object.keys(error).length !== 0 && (
-        <Text color="red.400" m={3}>  Error: {error.param}<br/> {error.msg}</Text>
+        <Text color="red.400" m={3}>
+          Error: {error.param} {error.msg}
+        </Text>
       )}
+
+      <Center>
+        <Button
+          colorScheme="teal"
+          size="lg"
+          variant="outline"
+          borderRadius="lg"
+          onClick={() => {
+            addComment();
+            setUsername('');
+            setTagname('');
+            setHeading('');
+            setText('');
+          }}
+        >
+          Post
+        </Button>
+      </Center>
     </Box>
   );
 }
