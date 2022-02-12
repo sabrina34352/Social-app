@@ -7,15 +7,6 @@ function Signup() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  function errors(num) {
-    if (Object.keys(error).length !== 0) {
-      return (
-        <Text color="red.400" m={3}>
-          {error[num].msg}
-        </Text>
-      );
-    }
-  }
 
   async function addUsers() {
     await fetch('http://localhost:8000/auth/registration', {
@@ -44,7 +35,15 @@ function Signup() {
       .catch(err => console.log('something went wrong', err));
   }
 
-  console.log(error);
+  function errors() {
+    if (Object.keys(error).length !== 0) {
+      return (
+        <Text color="red.400" m={3}>
+          {JSON.stringify(error)}
+        </Text>
+      );
+    }
+  }
 
   return (
     <>
@@ -59,28 +58,25 @@ function Signup() {
             value={username}
             onChange={event => setUsername(event.target.value)}
           />
-          {errors(1)}
           <Text m={2}>TagName</Text>
           <Input
             placeholder="Enter the tagname"
             value={tagname}
             onChange={event => setTagname(event.target.value)}
           />
-          {errors(0)}
           <Text m={2}>Email address</Text>
           <Input
             placeholder="Enter your email address"
             value={email}
-            onChange={event => setTagname(event.target.value)}
+            onChange={event => setEmail(event.target.value)}
           />
-          {errors(2)}
           <Text m={2}>Password</Text>
           <Input
             placeholder="Enter your password"
             value={password}
             onChange={event => setPassword(event.target.value)}
           />
-          {errors(3)}
+          {errors()}
           <Center mt={7}>
             <Button
               variant="solid"

@@ -12,15 +12,13 @@ import {
 
 function Posting() {
   const [error, setError] = useState({});
-  const [username, setUsername] = useState('');
-  const [tagname, setTagname] = useState('');
   const [heading, setHeading] = useState('');
   const [text, setText] = useState('');
 
   async function addComment() {
     await fetch('http://localhost:8000/api/posting/add-comment', {
       method: 'post',
-      body: JSON.stringify({ username, tagname, heading, text }),
+      body: JSON.stringify({ heading, text }),
       headers: { 'Content-Type': 'application/json' },
     })
       .then(res => {
@@ -51,12 +49,8 @@ function Posting() {
           p={5}
           borderRadius="lg"
           gap={10}
+          mt={10}
         >
-          <Input
-            placeholder="your name"
-            value={username}
-            onChange={event => setUsername(event.target.value)}
-          />
           <Input
             placeholder="Big Place for Main Text Of the post"
             value={heading}
@@ -82,10 +76,9 @@ function Posting() {
           size="lg"
           variant="outline"
           borderRadius="lg"
+          mt={5}
           onClick={() => {
             addComment();
-            setUsername('');
-            setTagname('');
             setHeading('');
             setText('');
           }}
