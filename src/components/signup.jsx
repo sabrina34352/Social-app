@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Text, Input, Button, Center } from '@chakra-ui/react';
 
 function Signup() {
+  const [errexist, setErrexists] = useState(false);
   const [error, setError] = useState({});
   const [tagname, setTagname] = useState('');
   const [username, setUsername] = useState('');
@@ -25,12 +26,14 @@ function Signup() {
             .json()
             .then(data => {
               setError(data);
+              setErrexists(true);
             })
             .catch(err => console.log(err));
         } else {
           res.json();
           setError({});
         }
+
       })
       .catch(err => console.log('something went wrong', err));
   }
@@ -54,27 +57,38 @@ function Signup() {
         <Box m="0 2em">
           <Text m={2}>UserName</Text>
           <Input
+            // isInvalid={Object.keys(error).length !== 0 ? true : false}
+            isInvalid={errexist}
             placeholder="Enter your name"
             value={username}
-            onChange={event => setUsername(event.target.value)}
+            onChange={event => {setUsername(event.target.value); setErrexists(false)}}
           />
           <Text m={2}>TagName</Text>
           <Input
+          isInvalid={errexist}
             placeholder="Enter the tagname"
             value={tagname}
-            onChange={event => setTagname(event.target.value)}
+            onChange={event =>{
+              setTagname(event.target.value)
+              setErrexists(false); 
+            }} 
           />
           <Text m={2}>Email address</Text>
           <Input
+          isInvalid={errexist}
             placeholder="Enter your email address"
             value={email}
-            onChange={event => setEmail(event.target.value)}
+            onChange={event =>{
+              setEmail(event.target.value);
+              setErrexists(false);
+            } }
           />
           <Text m={2}>Password</Text>
           <Input
+          isInvalid={errexist}
             placeholder="Enter your password"
             value={password}
-            onChange={event => setPassword(event.target.value)}
+            onChange={event => {setPassword(event.target.value); setErrexists(false)}}
           />
           {errors()}
           <Center mt={7}>
@@ -83,10 +97,14 @@ function Signup() {
               p="20px 30px"
               onClick={() => {
                 addUsers();
-                setEmail('');
-                setPassword('');
-                setUsername('');
-                setTagname('');
+                if (Object.keys(error).length !== 0 || errexist) {
+                  return false;
+                } else {
+                  setEmail('');
+                  setPassword('');
+                  setUsername('');
+                  setTagname('');
+                }
               }}
             >
               Sign up

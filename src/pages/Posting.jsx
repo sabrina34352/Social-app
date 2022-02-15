@@ -52,6 +52,7 @@ function Posting() {
           mt={10}
         >
           <Input
+            
             placeholder="Big Place for Main Text Of the post"
             value={heading}
             onChange={event => setHeading(event.target.value)}
@@ -79,8 +80,12 @@ function Posting() {
           mt={5}
           onClick={() => {
             addComment();
-            setHeading('');
-            setText('');
+            if(Object.keys(error).length !==0){
+              return false;
+            }else{
+              setHeading('');
+              setText('');
+            }
           }}
         >
           Post
