@@ -18,9 +18,9 @@ function App() {
           <Routes>
             <Route path="/">
               <Route index element={<Mainpage />} />
-              <Route path= "settings" element={<Settings />} />
-              <Route path= "chat" element={<Chat />} />
-              <Route path= "posting" element={<Posting/>} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="chat" element={<Chat />} />
+              <Route path="posting" element={<Posting />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

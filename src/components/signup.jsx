@@ -30,6 +30,7 @@ function Signup() {
         password,
       }),
       headers: { 'Content-Type': 'application/json' },
+      
     })
       .then(res => {
         if (!res.ok) {
@@ -119,3 +120,15 @@ function Signup() {
 }
 
 export default Signup;
+
+// Ruslan Panasiuk18:23
+// const fn = a => b => a + b
+// Ruslan Panasiuk18:27
+// o.fn()
+// Ruslan Panasiuk18:28
+// o.fn =functiom() { return this }
+// const fn = o.fn
+// fn()
+// Ruslan Panasiuk18:29
+// const log = console.log
+// log(1)
