@@ -31,8 +31,7 @@ app.post(
         async function AddingComments() {
           const newComment = client.db().collection('comments');
           await newComment.insertOne({ heading: heading, text: text });
-          const comments = await newComment.find();
-          res.status(200).send(comments);
+          res.status(200).send("Comment added successfully");
         }
         AddingComments();
       } catch (e) {
@@ -43,9 +42,17 @@ app.post(
 );
 
 app.get('/api/posting/add-comment', (req, res) => {
-  // const comments = client.db().collection('comments').find();
-  // res.status(200).send(comments);
-  res.status(200).send(req.body);
+  client
+    .db()
+    .collection('comments')
+    .find({})
+    .toArray(function (err, result) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.status(200).send(JSON.stringify(result));
+      }
+    });
 });
 
 app.use(ErrorDetected);

@@ -20,7 +20,6 @@ function Mainpage() {
       return ()=>{isMounted=false};
   }, []);
 
-  // const { allcomments } = comments;
   if(!loaded){
     return<Text textAlign="center" fontSize={25}>Please Wait...</Text>
   }
