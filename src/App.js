@@ -9,6 +9,7 @@ import Chat from './pages/Chat';
 import Posting from './pages/Posting';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+
 function App() {
   return (
     <ChakraProvider theme={theme}>

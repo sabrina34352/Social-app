@@ -1,12 +1,11 @@
-import { users } from '../../public/data.json';
 import { ApiErrors } from './api-errors';
 import Router from 'express';
 import bcrypt from 'bcrypt';
 import { check, body, validationResult } from 'express-validator';
 import { v4 as uuidv4 } from 'uuid';
+import { client } from './database';
 const router = new Router();
 
-//for users to register {not in frontend}
 router.post(
   '/registration',
   body('tagname')
@@ -39,24 +38,19 @@ router.post(
       async function newUserAddition() {
         const hashedpassword = await bcrypt.hash(password, 3);
         const activationLink = uuidv4();
-        users.push({
-          tagname,
-          username,
-          email,
+
+        const NewUsers = client.db().collection('users');
+        await NewUsers.insertOne({
+          tagname: tagname,
+          username: username,
           password: hashedpassword,
-          activationLink,
+          email: email,
+          activationLink: activationLink,
         });
-        res.status(200).json(users);
+        const newuser = await NewUsers.findOne({ username: username });
+        res.status(200).json(newuser);
       }
 
-      for (var index = 0; index < users.length; ++index) {
-        var oldUser = users[index];
-
-        if (oldUser.tagname === tagname || oldUser.email === email) {
-          hasMatchTagName = true;
-          break;
-        }
-      }
       if (hasMatchTagName) {
         throw ApiErrors.BadRequest(
           'Sorry! The user with the same tagname or email already exists!'

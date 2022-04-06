@@ -1,33 +1,20 @@
 import express from 'express';
-import { MongoClient } from 'mongodb';
 // import session from 'express-session';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { ErrorDetected } from './api-errors';
 import { body, validationResult } from 'express-validator';
-import { comments } from '../../public/data.json';
 import registration from './registration';
+import start, { client } from './database';
 const app = express();
-const client = new MongoClient(
-  'mongodb+srv://sabrina:Acceleration12@clusterfortwitter.l5klj.mongodb.net/twitterOzbe?retryWrites=true&w=majority'
-);
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
-const start = async () => {
-  try {
-    await client.connect();
-    console.log('Connected to twitterOzbe');
-  } catch (err) {
-    console.log(err);
-  }
-};
-start();
-
 //{not in frontend}
 app.use('/auth/', registration);
 
+start();
 //{not in the frontend}
 app.post(
   '/api/posting/add-comment',
@@ -41,8 +28,13 @@ app.post(
       try {
         const { heading, text } = req.body;
 
-        comments.push({ heading, text });
-        res.status(200).send(comments);
+        async function AddingComments() {
+          const newComment = client.db().collection('comments');
+          await newComment.insertOne({ heading: heading, text: text });
+          const comments = await newComment.find();
+          res.status(200).send(comments);
+        }
+        AddingComments();
       } catch (e) {
         next(e);
       }
@@ -51,7 +43,8 @@ app.post(
 );
 
 app.get('/api/posting/add-comment', (req, res) => {
-  res.status(200).send(comments);
+  // const comments = client.db().collection('comments').find();
+  // res.status(200).send(comments);
   res.status(200).send(req.body);
 });
 
