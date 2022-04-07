@@ -32,14 +32,14 @@ router.post(
       return res.status(400).json(err.array());
     }
     try {
-      var hasMatchTagName = false;
       const { tagname, username, email, password } = req.body;
+      const NewUsers = client.db().collection('users');
 
+      //addition of new user
       async function newUserAddition() {
         const hashedpassword = await bcrypt.hash(password, 3);
         const activationLink = uuidv4();
 
-        const NewUsers = client.db().collection('users');
         await NewUsers.insertOne({
           tagname: tagname,
           username: username,
@@ -47,17 +47,36 @@ router.post(
           email: email,
           activationLink: activationLink,
         });
-        const newuser = await NewUsers.findOne({ username: username });
+        const newuser = await NewUsers.findOne({ username });
         res.status(200).json(newuser);
       }
 
-      if (hasMatchTagName) {
-        throw ApiErrors.BadRequest(
-          'Sorry! The user with the same tagname or email already exists!'
-        );
-      } else {
-        newUserAddition();
+      //checking if the user already exists
+      async function checking() {
+        const user = await NewUsers.findOne({ tagname: tagname });
+        if (user) {
+          return true;
+        } else {
+          return false;
+        }
       }
+
+      //sending activation link to the user
+      checking().then(result => {
+        try{
+          if (result) {
+            throw ApiErrors.BadRequest(
+              'Sorry! The user with the same tagname or email already exists!'
+            );
+          } else {
+            newUserAddition();
+          }
+        }
+        catch(err){
+          next(err);
+        }
+      });
+
     } catch (error) {
       next(error);
     }
